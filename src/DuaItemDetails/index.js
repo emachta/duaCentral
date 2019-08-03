@@ -1,0 +1,1 @@
+export { DuaItemDetails } from './DuaItemDetails';
