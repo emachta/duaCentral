@@ -10,35 +10,53 @@ export default class DuaListView extends PureComponent {
   }
 
   render() {
-    const articles = this.props.data.map(item => (
+    const dataArray = this.props.data.map(item => (
       <DuaListItem
         arabicDua={item.arabicDua}
         englishDua={item.englishDua}
-        favorited={false}
+        translationDua={item.translationDua}
+        tags={item.tags}
+        navigate={this.props.navigate}
         input={this.state.input}
-        key={item.arabicDua}
+        id={item.id}
+        key={item.id}
+        onPress={() => this.props.navigate('Details', {
+          arabicDua: item.arabicDua,
+          englishDua: item.englishDua,
+          translationDua: item.translationDua,
+          tags: item.tags,
+        })
+        }
       />
     ));
 
     return (
       <View style={{ alignItems: 'center' }}>
         <TextInput
-          placeholder="Type a dua"
+          placeholder="🔍 Enter a dua"
           style={{
             marginTop: 15,
-            width: 250,
-            height: 30,
+            width: 280,
+            height: 40,
             backgroundColor: 'white',
             borderRadius: 5,
+            padding: 5,
+            fontSize: 18,
+            shadowColor: 'black',
+            shadowRadius: 1,
+            shadowOpacity: 0.1,
+            shadowOffset: { height: 3 },
           }}
           onChangeText={(text) => {
-            this.setState({ input: text });
+            this.setState({ input: text.toLowerCase() });
           }}
+          clearButtonMode="always"
         />
 
-        <ScrollView>
-          <View style={{ marginTop: 40 }} />
-          {articles}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={{ marginTop: 25 }} />
+          {dataArray}
+          <View style={{ marginBottom: 100 }} />
         </ScrollView>
       </View>
     );

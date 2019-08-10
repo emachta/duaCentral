@@ -1,17 +1,24 @@
 import React, { PureComponent } from 'react';
-import { Text, View, Dimensions } from 'react-native';
+import {
+  Text, View, ScrollView, Dimensions,
+} from 'react-native';
 
 export default class DuaItemDetails extends PureComponent {
   render() {
-    const { arabicDua, englishDua } = this.props;
+    const { arabicDua, translationDua, englishDua } = this.props;
     return (
-      <View style={{ flex: 1, backgroundColor: 'black', width: Dimensions.get('window').width }}>
-        <View style={{ backgroundColor: '#061019', flex: 1, padding: 30 }}>
-          <Text style={{ color: 'white', fontSize: 35 }}>{arabicDua}</Text>
-        </View>
-        <View style={{ backgroundColor: '#DCE5DF', flex: 2, padding: 30 }}>
-          <Text style={{ fontSize: 35 }}>{englishDua}</Text>
-        </View>
+      <View
+        style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height }}
+      >
+        <ScrollView style={{ backgroundColor: '#061019', padding: 25 }}>
+          <Text style={{ color: 'white', fontSize: 40 }}>{arabicDua}</Text>
+          <Text style={{ color: 'white', fontSize: 19, marginTop: 20 }}>{englishDua}</Text>
+          <View style={{ marginBottom: 100 }} />
+        </ScrollView>
+        <ScrollView style={{ backgroundColor: '#DCE5DF', padding: 25 }}>
+          <Text style={{ fontSize: 25, marginBottom: 50 }}>{translationDua}</Text>
+          <View style={{ marginBottom: 100 }} />
+        </ScrollView>
       </View>
     );
   }
