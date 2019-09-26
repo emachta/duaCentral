@@ -8,6 +8,7 @@ export class DuaListItem extends PureComponent {
     this.state = {
       favorited: false,
       visible: true,
+      showAll: false,
     };
   }
 
@@ -32,12 +33,21 @@ export class DuaListItem extends PureComponent {
   }
 
   _retrieveData = async id => {
-    const value = await AsyncStorage.getItem(id + ':favorited');
+    const favoritedValue = await AsyncStorage.getItem(id + ':favorited');
+    const showAllDuas = await AsyncStorage.getItem('showAllDuas');
 
-    if (value === null) {
+    if (favoritedValue === null) {
       this.setState({ favorited: false });
     } else {
       this.setState({ favorited: true });
+    }
+
+    if (showAllDuas === null) {
+      this.setState({ showAll: false });
+    } else if (showAllDuas === 'true') {
+      this.setState({ showAll: true });
+    } else if (showAllDuas === 'false') {
+      this.setState({ showAll: false });
     }
   };
 
@@ -60,7 +70,9 @@ export class DuaListItem extends PureComponent {
       <View
         style={{
           display:
-            (this.state.visible && input !== '') || (this.state.favorited && input == '')
+            this.state.showAll ||
+            (this.state.visible && input !== '') ||
+            (this.state.favorited && input == '')
               ? 'flex'
               : 'none',
         }}

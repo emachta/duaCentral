@@ -14,13 +14,19 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.duaCentral"
+      "bundleIdentifier": "com.duaCentral",
+      "buildNumber": "4"
     },
-    "description": ""
+    "description": "",
+    "android": {
+      "package": "com.duaCentral"
+    }
   }
 }
